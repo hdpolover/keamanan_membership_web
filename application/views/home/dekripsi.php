@@ -21,12 +21,13 @@
 							<a href="<?= site_url('member');?>" class="btn btn-primary btn-sm float-right mb-3">Kembali</a>
 						</h2>
 					</div>
+					<br>
 					<form action="<?= site_url('home/edit_data');?>" method="post">
 						<div class="body">
 							<div class="form-group">
 								<label for="inputId">ID</label>
-								<input type="text" class="form-control" id="inputId" name="id"
-									value="<?= $member['id'];?>" <?= $action == 'readonly' ? 'readonly' : 'required';?>>
+								<input type="text" class="form-control" id="inputId" name="id_member"
+									value="<?= $member['id_member'];?>" <?= $action == 'readonly' ? 'readonly' : 'required';?>>
 							</div>
 							<div class="form-group">
 								<label for="inputNama">Nama</label>
@@ -76,12 +77,12 @@
 							<?php endif;?>
 						</div>
 						<div class="footer text-right">
-							<?php if ($this->uri->segment(2) == 'detail'):?>
+							<!-- <?php if ($this->uri->segment(2) == 'detail'):?>
 							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#decrypt"
 								onclick="actionKode('readonly')">decrypt</button>
 							<?php else:?>
-							<a href="<?= site_url('member/detail/'.$member['id']);?>" class="btn btn-primary">encrypt</a>
-							<?php endif;?>
+							<a href="<?= site_url('member/detail/'.$member['id_member']);?>" class="btn btn-primary">encrypt</a>
+							<?php endif;?> -->
 						</div>
 					</form>
 				</div>
@@ -111,7 +112,7 @@
 			<div class="modal-header">
 				<h4 class="title" id="largeModalLabel"><span class="wantTo"></span> data</h4>
 			</div>
-			<form action="<?= site_url('member/edit/'.$member['id']);?>" method="post">
+			<form action="<?= site_url('member/edit/'.$member['id_member']);?>" method="post">
 				<div class="modal-body">
 					<p>Harap masukkan kode, untuk <span class="wantTo"></span> data</p>
 					<div class="form-group">

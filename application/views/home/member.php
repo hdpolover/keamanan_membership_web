@@ -1,3 +1,10 @@
+<style>
+	.modal-backdrop {
+		display: none !important;
+	}
+
+</style>
+
 <!-- Main Content -->
 <section class="content">
 	<div class="container-fluid">
@@ -17,11 +24,11 @@
 		<div class="row clearfix">
 			<div class="col-lg-12">
 				<div class="card">
-					<div class="header mb-3">
+					<!-- <div class="header mb-3">
 						<h2>
 							<button type="button" class="btn btn-primary btn-sm float-right mb-3" data-toggle="modal"
 								data-target="#tambah">Tambah Data</button></h2>
-					</div>
+					</div> -->
 					<div class="body">
 						<table class="table table-bordered table-striped table-hover js-basic-example dataTable w-100"
 							style="width: 100%;">
@@ -30,6 +37,7 @@
 									<th width="10">No</th>
 									<th width="20"></th>
 									<th>ID</th>
+									<th>Nama</th>
 									<th>Status</th>
 								</tr>
 							</thead>
@@ -39,14 +47,70 @@
 								<tr>
 									<td><?= $no++;?></td>
 									<td>
-										<a href="<?= site_url('member/detail/'.$val->id);?>"
-											class="btn btn-primary btn-sm">detail</a>
-											<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#decrypt" onclick="getIDmember('<?= $val->id;?>')">edit</button>
+										<button type="button" data-toggle="modal"
+											data-target="#detail-<?= $val->id_member;?>"
+											class="btn btn-primary btn-sm">detail</button>
 									</td>
-									<td><?= $val->id;?></td>
+									<td><?= $val->id_member;?></td>
+									<td><?= $val->nama;?></td>
 									<td><button type="button"
 											class="btn btn-success btn-sm"><?= $val->status;?></button></td>
 								</tr>
+
+								<!-- Large Size -->
+								<div class="modal fade" id="detail-<?= $val->id_member;?>" tabindex="-1" role="dialog">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="title" id="largeModalLabel">Detail member</h4>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<label for="inputId">ID</label>
+													<input type="text" class="form-control" id="inputId"
+														name="id_member" value="<?= $val->id_member;?>" readonly>
+												</div>
+												<div class="form-group">
+													<label for="inputNama">Nama</label>
+													<input type="text" class="form-control" id="inputNama" name="nama"
+														value="<?= $val->nama;?>" readonly>
+												</div>
+												<div class="form-group">
+													<label for="inputAlamat">Alamat</label>
+													<textarea type="text" class="form-control" id="inputAlamat"
+														name="alamat" rows="3" readonly><?= $val->alamat;?></textarea>
+												</div>
+												<div class="form-group">
+													<label for="inputTempatLahir">Tempat Lahir</label>
+													<input type="text" class="form-control" id="inputTempatLahir"
+														name="tempat_lahir" value="<?= $val->tempat_lahir;?>" readonly>
+												</div>
+												<div class="form-group">
+													<label for="inputTanggalLahir">Tanggal Lahir</label>
+													<input type="date" class="form-control" id="inputTanggalLahir"
+														name="tanggal_lahir" value="<?= $val->tanggal_lahir;?>"
+														readonly>
+												</div>
+												<div class="form-group">
+													<label for="inputJenisKelamin">Jenis Kelamin</label>
+													<input type="text" class="form-control" id="inputNomorTelepon"
+														name="no_telp" value="<?= $val->jenis_kelamin ;?>" readonly>
+												</div>
+												<div class="form-group">
+													<label for="inputNomorTelepon">Nomor Telepon</label>
+													<input type="text" class="form-control" id="inputNomorTelepon"
+														name="no_telp" value="<?= $val->no_telp;?>" readonly>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button"
+													class="btn btn-primary btn-simple btn-round waves-effect"
+													data-dismiss="modal">Tutup</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
 								<?php endforeach;?>
 								<?php endif;?>
 							</tbody>

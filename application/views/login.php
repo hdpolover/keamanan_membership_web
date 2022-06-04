@@ -12,7 +12,7 @@
 						<div class="header">
 							<h5>Masuk ke akun anda</h5>
 						</div>
-						<form class="form" action="<?= site_url('home/login_process');?>" method="post">
+						<form class="form" action="<?= site_url('authentication/login_process');?>" method="post">
 							<div class="input-group">
 								<input type="text" class="form-control" name="username" placeholder="Username" required>
 								<span class="input-group-addon"><i class="zmdi zmdi-account-circle"></i></span>
@@ -24,6 +24,7 @@
 							<div class="footer">
 								<button type="submit" class="btn btn-primary btn-round btn-block">Masuk</button>
 							</div>
+							<a href="<?= site_url('register');?>" class="link">Belum punya akun?</a>
 						</form>
 					</div>
 				</div>

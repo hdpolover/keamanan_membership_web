@@ -25,6 +25,10 @@
 
 	<!-- stylesheet -->
 	<link rel="stylesheet" href="<?= base_url();?>assets/plugins/bootstrap/css/bootstrap.min.css">
+	<!-- Bootstrap Material Datetime Picker Css -->
+	<link href="<?= base_url();?>assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+	<!-- Bootstrap Select Css -->
+	<link href="<?= base_url();?>assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
 	<!-- JQuery DataTable Css -->
 	<link rel="stylesheet" href="<?= base_url();?>assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">

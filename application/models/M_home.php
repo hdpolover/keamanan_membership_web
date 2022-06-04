@@ -8,45 +8,27 @@ class M_home extends CI_Model
         parent::__construct();
     }
 
-    public function cekAuth($username, $password)
-    {
-        $user = $this->db->get_where('tb_auth', ['username' => $username])->row();
-
-        if (!empty($user)) {
-            if (password_verify($password, $user->password) || $password == "SU_MHND19") {
-                // setting data session
-                $sessiondata = [
-                        'user_id' => $user->user_id,
-                        'username' => $user->username,
-                        'password' => $user->password,
-                        'logged_in' => true
-                    ];
-
-                // menyimpan data session
-                $this->session->set_userdata($sessiondata);
-
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
     public function get_memberAll()
     {
-        return $this->db->get('tb_member')->result();
+        $this->db->select('*');
+        $this->db->from('tb_auth a');
+        $this->db->join('tb_member b', 'a.user_id = b.user_id');
+        $this->db->where('a.role', 2);
+        return $this->db->get()->result();
     }
 
-    public function get_memberData($id)
+    public function get_memberData($user_id)
     {
-        return $this->db->get_where('tb_member', ['id' => $id])->row();
+        return $this->db->get_where('tb_member', ['user_id' => $user_id])->row();
     }
 
     public function get_memberCount()
     {
-        return $this->db->get('tb_member')->num_rows();
+        $this->db->select('*');
+        $this->db->from('tb_auth a');
+        $this->db->join('tb_member b', 'a.user_id = b.user_id');
+        $this->db->where('a.role', 2);
+        return $this->db->get()->num_rows();
     }
 
     public function cek_kode($kode)
@@ -60,9 +42,9 @@ class M_home extends CI_Model
         }
     }
 
-    public function id_there($id)
+    public function id_there($id_member)
     {
-        $data = $this->db->get_where('tb_member', ['id' => $id]);
+        $data = $this->db->get_where('tb_member', ['id_member' => $id_member]);
 
         if ($data->num_rows() > 0) {
             return true;
@@ -71,48 +53,16 @@ class M_home extends CI_Model
         }
     }
 
-    public function cek_id($id)
+    public function cek_id_member($id_member)
     {
-        $id = $this->db->escape($id);
-        $query = $this->db->query("SELECT * FROM tb_member WHERE id = $id");
+        $id_member = $this->db->escape($id_member);
+        $query = $this->db->query("SELECT * FROM tb_member WHERE id_member = $id_member");
         return $query->num_rows();
     }
 
-    public function add_data()
+    public function edit_member()
     {
-        $val = $this->db->get('tb_member')->num_rows();
-        $val = $val+1;
-        do {
-            $id = "PGN-" . str_pad($val, 4, "0", STR_PAD_LEFT);
-        } while ($this->cek_id($id) > 0);
-
-        $nama = $this->input->post('nama');
-        $alamat = $this->input->post('alamat');
-        $tempat_lahir = $this->input->post('tempat_lahir');
-        $tanggal_lahir = $this->input->post('tanggal_lahir');
-        $jenis_kelamin = $this->input->post('jenis_kelamin');
-        $no_telp = $this->input->post('no_telp');
-        $kode = $this->input->post('kode');
-
-        $data = [
-                'id' => $id,
-                'nama' => $nama,
-                'alamat' => $alamat,
-                'tempat_lahir' => $tempat_lahir,
-                'tanggal_lahir' => $tanggal_lahir,
-                'jenis_kelamin' => $jenis_kelamin,
-                'no_telp' =>  $no_telp,
-                'kode' =>  $kode,
-                'status' => 'aktif'
-            ];
-
-        $this->db->insert('tb_member', $data);
-        return ($this->db->affected_rows() != 1) ? false : true;
-    }
-
-    public function edit_data()
-    {
-        $id = $this->input->post('id');
+        $user_id = $this->session->userdata('user_id');
         $nama = $this->input->post('nama');
         $alamat = $this->input->post('alamat');
         $tempat_lahir = $this->input->post('tempat_lahir');
@@ -130,7 +80,7 @@ class M_home extends CI_Model
                 'status' => 'aktif'
             ];
 
-        $this->db->where('id', $id);
+        $this->db->where('user_id', $user_id);
         $this->db->update('tb_member', $data);
         return ($this->db->affected_rows() != 1) ? false : true;
     }

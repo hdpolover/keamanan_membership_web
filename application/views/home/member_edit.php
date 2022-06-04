@@ -25,8 +25,8 @@
 						<div class="body">
 							<div class="form-group">
 								<label for="inputId">ID</label>
-								<input type="text" class="form-control" id="inputId" name="id"
-									value="<?= $member['id'];?>" readonly>
+								<input type="text" class="form-control" id="inputId" name="id_member"
+									value="<?= $member['id_member'];?>" readonly>
 							</div>
 							<div class="form-group">
 								<label for="inputNama">Nama</label>
@@ -68,7 +68,7 @@
 							</div>
 						</div>
 						<div class="footer text-right">
-							<button type="submit" class="btn btn-primary">Simpan</button>
+							<!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
 						</div>
 					</form>
 				</div>

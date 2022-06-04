@@ -1,3 +1,7 @@
 .swal2-select {
-    display: none !important;
+	display: none !important;
+}
+
+.authentication::before {
+	z-index: 0 !important;
 }
